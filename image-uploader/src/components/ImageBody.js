@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../css/imagebody.css';
-import imgWidthHeightCalc from './ImageWidthHeightCalc';
+import {isEditable,imgWidthHeightCalc} from './ImageWidthHeightCalc';
 import Image from './Image';
 
 export default class ImageBody extends Component {
@@ -21,11 +21,14 @@ export default class ImageBody extends Component {
                dim:dim
             }
         )
+        
     }
 addImage = (e)=>{
+    if(this.fileRef.current.files.length === 0 || isEditable(this.fileRef.current.files[0]))
+    return;
     console.log(this.state.sources);
     let newSources = this.state.sources.slice(0);
-    newSources.push(this.fileRef.current.files[0]);
+    newSources.push(URL.createObjectURL(this.fileRef.current.files[0]));
     this.setState({
         sources:newSources
     })

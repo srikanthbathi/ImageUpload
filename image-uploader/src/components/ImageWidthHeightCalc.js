@@ -1,6 +1,6 @@
 const aspectRatio = 0.8;
 
-export default  function imgWidthHeightCalc(width){
+export  function imgWidthHeightCalc(width){
        const dim = {width:"",height:""};
            var w = Number.parseInt(width/4-10);
            var h =Number.parseInt(w * (1/aspectRatio));
@@ -8,4 +8,24 @@ export default  function imgWidthHeightCalc(width){
            dim.height = h+ "px";
            console.log(h)
        return dim;
+}
+function getImageResolution(width,height){
+return width/height;
+}
+
+export function isEditable(file){
+    let src = URL.createObjectURL(file);
+    let width,height, img = new Image();
+    img.src = src;
+     img.onload = ()=>{
+        console.log(img)
+       width = img.naturalWidth;
+       height = img.naturalHeight;
+       console.log(width+ " "+height)
+    }
+   let aspectRatio = getImageResolution(width,height);
+   if(aspectRatio>0.75 && aspectRatio<0.85){
+       return false;
+   }
+   return true;
 }
