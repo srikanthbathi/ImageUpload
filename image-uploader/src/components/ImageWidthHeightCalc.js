@@ -16,12 +16,15 @@ return width/height;
 export function isEditable(file){
     let src = URL.createObjectURL(file);
     let width,height, img = new Image();
+
     img.src = src;
-     img.onload = ()=>{
-        console.log(img)
+   let imageLoaded = false;
+     img.onload = (e)=>{
+        console.log(e)
        width = img.naturalWidth;
        height = img.naturalHeight;
-       console.log(width+ " "+height)
+       console.log(width+ " "+height);
+       console.log(imageLoaded)
     }
    let aspectRatio = getImageResolution(width,height);
    if(aspectRatio>0.75 && aspectRatio<0.85){

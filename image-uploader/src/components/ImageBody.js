@@ -24,7 +24,7 @@ export default class ImageBody extends Component {
         
     }
 addImage = (e)=>{
-    if(this.fileRef.current.files.length === 0 || isEditable(this.fileRef.current.files[0]))
+    if(this.fileRef.current.files.length === 0)
     return;
     console.log(this.state.sources);
     let newSources = this.state.sources.slice(0);
@@ -34,7 +34,6 @@ addImage = (e)=>{
     })
 }
     render() {
-        const sources = []
         return (
             <div className="image-body">
                 <div ref = {this.imgContainer} className="image-container">

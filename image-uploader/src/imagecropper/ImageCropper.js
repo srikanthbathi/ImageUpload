@@ -10,8 +10,7 @@ export default class ImageCropper extends Component {
                 width={450}
                 height={450}
                 border={1}
-                color={[0, 0, 0, 0.4]} 
-                />
+                color={[0, 0, 0, 0.4]}/>
                 </div>
                 
             </div>
