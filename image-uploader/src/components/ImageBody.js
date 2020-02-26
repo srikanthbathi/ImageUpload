@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import '../css/imagebody.css';
 import {isEditable,imgWidthHeightCalc} from './ImageWidthHeightCalc';
 import Image from './Image';
+import {connect} from 'react-redux';
 
-export default class ImageBody extends Component {
+ class ImageBody extends Component {
     constructor(props){
         super(props);
+        console.log("constructor props",props)
         this.state= {
             dim:"",
             sources:[]
@@ -23,23 +25,25 @@ export default class ImageBody extends Component {
         )
         
     }
+    componentDidUpdate(){
+        console.log("componentDidUpdate",this.props)
+    }
 addImage = (e)=>{
+    console.log(this.fileRef.current.files.length )
     if(this.fileRef.current.files.length === 0)
     return;
-    console.log(this.state.sources);
-    let newSources = this.state.sources.slice(0);
-    newSources.push(URL.createObjectURL(this.fileRef.current.files[0]));
-    this.setState({
-        sources:newSources
-    })
+
+    let objUrl = URL.createObjectURL(this.fileRef.current.files[0]);
+    this.props.addImageSource(objUrl);
+    
 }
     render() {
         return (
             <div className="image-body">
                 <div ref = {this.imgContainer} className="image-container">
                           {
-                              this.state.sources.map(
-                                  (item)=><Image width = {this.state.dim.width} height={this.state.dim.height} 
+                              this.props.sources.map(
+                                  (item,index)=><Image key={index} width = {this.state.dim.width} height={this.state.dim.height} 
                                   src = {item} img={true}/>)
                           }
 
@@ -54,3 +58,22 @@ addImage = (e)=>{
         )
     }
 }
+
+const mapStateToprops = state=>{
+    return {
+        sources:state.imgSources
+    }
+}
+
+const mapDispatcherToprops = (dispatch)=>{
+
+    const res = {type:"ADD_SOURCE",value:"Source"}
+    return {
+        addImageSource : (source)=>{
+            res.value=source;
+            dispatch(res);
+        }
+    }
+}
+
+export default connect(mapStateToprops,mapDispatcherToprops)(ImageBody);

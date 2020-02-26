@@ -4,6 +4,12 @@ import SideDesc from './SideDesc'
 import ImageBody from './ImageBody'
 
 export default class ImageUploadModal extends Component {
+
+    constructor(props){
+        super(props);
+        console.log(props);
+    }
+
     render() {
         return (
             <div className="modal">
