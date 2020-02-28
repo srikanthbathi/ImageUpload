@@ -5,7 +5,7 @@ export  function imgWidthHeightCalc(width){
            var w = Number.parseInt(width/4-10);
            var h =Number.parseInt(w * (1/aspectRatio));
            dim.width = w +"px";
-           dim.height = h+ "px";
+           dim.height = (h)+ "px";
            console.log(h)
        return dim;
 }

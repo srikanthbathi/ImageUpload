@@ -7,6 +7,7 @@ import {Provider} from 'react-redux';
 import rootReducer from './reducers/rootReducer';
 
 
+
 const store = createStore(rootReducer)
 
 function App() {
@@ -14,7 +15,8 @@ function App() {
      <div>
             {/*<ImageCropper/>*/}
             <ImageUploadModal/>
-          </div>
+           
+    </div>
           </Provider>
   );
 }

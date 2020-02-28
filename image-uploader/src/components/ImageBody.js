@@ -3,6 +3,7 @@ import '../css/imagebody.css';
 import {isEditable,imgWidthHeightCalc} from './ImageWidthHeightCalc';
 import Image from './Image';
 import {connect} from 'react-redux';
+import LoadingIndicator from '../LoadingIndicator/LoadingIndicator';
 
  class ImageBody extends Component {
     constructor(props){
@@ -46,6 +47,7 @@ addImage = (e)=>{
                                   (item,index)=><Image key={index} width = {this.state.dim.width} height={this.state.dim.height} 
                                   src = {item} img={true}/>)
                           }
+                           <LoadingIndicator loading = {true} color={"#000000"}/>
 
                           <Image  width = {this.state.dim.width} height = {this.state.dim.height}>
                           <label  className="add-img">
