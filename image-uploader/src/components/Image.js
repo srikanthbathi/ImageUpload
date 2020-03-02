@@ -12,6 +12,9 @@ class Image extends Component {
        console.log(e.target.parentElement,this.imgref.current)
        this.props.deleteImage(this.imgref.current.src)
     }
+    addPreview =()=>{
+        this.props.openPreview(this.imgref.current.src)
+    }
     
     render() {
         return (
@@ -22,7 +25,7 @@ class Image extends Component {
                [
                <img ref ={this.imgref} className="img" alt="Img" src = {this.props.src}></img>,
                <div key={this.props.key} className="toolBox">
-                   <i class="fa fa-eye"></i>
+                   <i class="fa fa-eye" onClick={this.addPreview}></i>
                    <i class="fa fa-edit"></i>
                    <i class="fa fa-trash" onClick={this.performDelete}></i>
                </div>
@@ -39,7 +42,8 @@ class Image extends Component {
 const mapDispatchToProps = (dispatch)=>
 {
     return ({
-       deleteImage:(source)=>{dispatch({type:"DELETE_SOURCE",value:source})}
+       deleteImage:(source)=>{dispatch({type:"DELETE_SOURCE",value:source})},
+       openPreview:(source)=>{dispatch({type:"OPEN_PREVIEW",value:source})}
     })
 
 }

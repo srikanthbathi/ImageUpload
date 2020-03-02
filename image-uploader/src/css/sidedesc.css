@@ -44,8 +44,15 @@
     content: attr(placeholder);
     position: relative;
     color: gray;
-    opacity: 0.7;
+    opacity: 1;
     background-color: transparent;
   }
+
+  input::placeholder{
+      color:rgba(0, 0, 0, 0.5);
+  }
+
+  input:focus::placeholder{
+    color:rgba(0, 0, 0, 0.2);  }
 
 

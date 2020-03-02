@@ -3,7 +3,8 @@ import '../css/modal.css'
 import SideDesc from './SideDesc'
 import ImageBody from './ImageBody';
 import {connect} from 'react-redux';
-import processImage from '../Imageprocssor/ImageProcessor'
+import Footer from '../footer/Footer';
+
 
  class ImageUploadModal extends Component {
 
@@ -11,11 +12,19 @@ import processImage from '../Imageprocssor/ImageProcessor'
         super(props);
         console.log(props);
         this.fileRef = new React.createRef()
+        this.state = {
+            close: false
+        }
     }
 
-    
+    closeModal = () => {
+      this.setState({
+          close:true
+      })
+    }
+
 addImgSrc = ()=>{
-    console.log(this.fileRef.current.files.length )
+    console.log(this.fileRef.current.files.length)
     if(this.fileRef.current.files.length === 0)
     return;
 
@@ -24,32 +33,40 @@ addImgSrc = ()=>{
 }
     render() {
         return (
-            <div className="modal">
+            <div  className={this.state.close?"display-none":"modal"} >
                 {/* this is root modal */}
                 <div className="modal-dialog">
                     
                      {/* this is header panel */}
                     <div className="modal-header">
                         <h4>Create Items</h4>
+                        <div style={{display:"flex",justifyContent:"space-between",width:"120px"}}>
                         <div>
-                            <label >
+                            <label>
                                 <i className="fa fa-image"></i> Add Photo
                                 <input ref ={this.fileRef} onChange={this.addImgSrc} type="file" style={{ display: "none" }} name="image" />
                             </label>
                         </div>
+                        <i onClick={this.closeModal} class="fa fa-times"></i>
+                        </div>
+                        
                     </div>
 
                     {/* this is modal */}
                     <div className="modal-body">
                         <SideDesc />
                         <ImageBody />
-
                     </div>
+                    <Footer/>
                 </div>
 
             </div>
         )
     }
+}
+
+const mapStatetoProps = (state) =>{
+    return{preview:state.preview}
 }
 
 const mapDispatcherToProps = (dispatch)=>{
@@ -65,4 +82,4 @@ const mapDispatcherToProps = (dispatch)=>{
 
 }
 
-export default  connect(null,mapDispatcherToProps)( ImageUploadModal)
+export default  connect(mapStatetoProps,mapDispatcherToProps)( ImageUploadModal)

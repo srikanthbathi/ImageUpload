@@ -12,7 +12,7 @@ const store = createStore(rootReducer)
 
 function App() {
   return (<Provider store={store}>
-     <div>
+     <div >
             {/*<ImageCropper/>*/}
             <ImageUploadModal/>
            

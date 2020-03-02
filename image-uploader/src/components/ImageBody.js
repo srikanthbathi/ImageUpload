@@ -4,6 +4,8 @@ import {isEditable,imgWidthHeightCalc} from './ImageWidthHeightCalc';
 import Image from './Image';
 import {connect} from 'react-redux';
 import LoadingIndicator from '../LoadingIndicator/LoadingIndicator';
+import Footer from '../footer/Footer';
+import Preview from '../preview/Preview';
 
  class ImageBody extends Component {
     constructor(props){
@@ -41,6 +43,7 @@ addImage = (e)=>{
     render() {
         return (
             <div className="image-body">
+                {this.props.preview!==""? <Preview/>:[]}
                 <div ref = {this.imgContainer} className="image-container">
                           {
                               this.props.sources.map(
@@ -63,7 +66,8 @@ addImage = (e)=>{
 
 const mapStateToprops = state=>{
     return {
-        sources:state.imgSources
+        sources:state.imgSources,
+        preview:state.preview
     }
 }
 
